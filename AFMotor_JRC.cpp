@@ -9,7 +9,7 @@
 #include "WProgram.h"
 #endif
 
-#include "AFMotor.h"
+#include "AFMotor_JRC.h"
 
 #include "JRC.h" // For mapping arduino pins with JRC Board pins
 
