@@ -6,6 +6,7 @@
 #include "JRC.h" // JRC Board Pin Mapping
 
 #include <inttypes.h>
+
 #if defined(__AVR__)
 #include <avr/io.h>
 
@@ -26,44 +27,22 @@
 #define STEPPER1_PWM_RATE MOTOR12_64KHZ // PWM rate for stepper 1
 #define STEPPER2_PWM_RATE MOTOR34_64KHZ // PWM rate for stepper 2
 
-#elif defined(__PIC32MX__)
-// #define MOTORDEBUG 1
+#elif defined(ESP32)
 
-// Uncomment the one of following lines if you have put a jumper from
-// either pin 9 to pin 11 or pin 10 to pin 11 on your Motor Shield.
-// Either will enable PWM for M1
-// #define PIC32_USE_PIN9_FOR_M1_PWM
-// #define PIC32_USE_PIN10_FOR_M1_PWM
+#define MICROSTEPS 16 // 8 or 16
 
-#define MICROSTEPS 16    // 8 or 16
+#define MOTOR12_64KHZ 64000
+#define MOTOR12_8KHZ 8000
+#define MOTOR12_2KHZ 2000
+#define MOTOR12_1KHZ 1000
 
-// For PIC32 Timers, define prescale settings by PWM frequency
-#define MOTOR12_312KHZ 0 // 1:1, actual frequency 312KHz
-#define MOTOR12_156KHZ 1 // 1:2, actual frequency 156KHz
-#define MOTOR12_64KHZ 2  // 1:4, actual frequency 78KHz
-#define MOTOR12_39KHZ 3  // 1:8, acutal frequency 39KHz
-#define MOTOR12_19KHZ 4  // 1:16, actual frequency 19KHz
-#define MOTOR12_8KHZ 5   // 1:32, actual frequency 9.7KHz
-#define MOTOR12_4_8KHZ 6 // 1:64, actual frequency 4.8KHz
-#define MOTOR12_2KHZ 7   // 1:256, actual frequency 1.2KHz
-#define MOTOR12_1KHZ 7   // 1:256, actual frequency 1.2KHz
+#define MOTOR34_64KHZ 64000
+#define MOTOR34_8KHZ 8000
+#define MOTOR34_1KHZ 1000
 
-#define MOTOR34_312KHZ 0 // 1:1, actual frequency 312KHz
-#define MOTOR34_156KHZ 1 // 1:2, actual frequency 156KHz
-#define MOTOR34_64KHZ 2  // 1:4, actual frequency 78KHz
-#define MOTOR34_39KHZ 3  // 1:8, acutal frequency 39KHz
-#define MOTOR34_19KHZ 4  // 1:16, actual frequency 19KHz
-#define MOTOR34_8KHZ 5   // 1:32, actual frequency 9.7KHz
-#define MOTOR34_4_8KHZ 6 // 1:64, actual frequency 4.8KHz
-#define MOTOR34_2KHZ 7   // 1:256, actual frequency 1.2KHz
-#define MOTOR34_1KHZ 7   // 1:256, actual frequency 1.2KHz
-
-// PWM rate for DC motors.
-#define DC_MOTOR_PWM_RATE MOTOR34_39KHZ
-// Note: for PIC32, both of these must be set to the same value
-// since there's only one timebase for all 4 PWM outputs
-#define STEPPER1_PWM_RATE MOTOR12_39KHZ
-#define STEPPER2_PWM_RATE MOTOR34_39KHZ
+#define DC_MOTOR_PWM_RATE MOTOR34_8KHZ  // PWM rate for DC motors
+#define STEPPER1_PWM_RATE MOTOR12_64KHZ // PWM rate for stepper 1
+#define STEPPER2_PWM_RATE MOTOR34_64KHZ // PWM rate for stepper 2
 
 #endif
 
