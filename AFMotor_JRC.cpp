@@ -102,13 +102,12 @@ inline void initPWM1(uint8_t freq)
   TCCR1B = (freq & 0x7) | _BV(WGM12);
   OCR1A = 0;
 #elif defined(ESP32)
-  ledcSetup(0, freq, 8);     // Setting up channel 0, 8-bit resolution (0-255)
-  ledcAttachPin(ARD_D11, 0); // attach Arduino pin 11 equivalent to channel 0
+  int intFreq = static_cast<int>(freq) * 1000; // for converting uint8_t to int
+  ledcSetup(0, intFreq, 8);                    // Setting up channel 0, 8-bit resolution (0-255)
+  ledcAttachPin(ARD_D11, 0);                   // attach Arduino pin 11 equivalent to channel 0
 #else
 #error "This chip is not supported!"
 #endif
-
-  pinMode(ARD_D11, OUTPUT); // CHECK: Don't know whether its necessary
 }
 
 inline void setPWM1(uint8_t s)
@@ -124,7 +123,7 @@ inline void setPWM1(uint8_t s)
   // on arduino mega, pin 11 is now PB5 (OC1A)
   OCR1A = s;
 #elif defined(ESP32)
-  ledcWrite(0, s);           // channel 0, ARD_D11 pin
+  ledcWrite(0, s);                             // channel 0, ARD_D11 pin
 #else
 #error "This chip is not supported!"
 #endif
@@ -147,13 +146,12 @@ inline void initPWM2(uint8_t freq)
   TCCR3B = (freq & 0x7) | _BV(WGM12);
   OCR3C = 0;
 #elif defined(ESP32)
-  ledcSetup(1, freq, 8);     // Setting up channel 1, 8-bit resolution (0-255)
-  ledcAttachPin(ARD_D3, 1);  // attach Arduino pin 3 equivalent to channel 1
+  int intFreq = static_cast<int>(freq) * 1000; // for converting uint8_t to int
+  ledcSetup(1, intFreq, 8);                    // Setting up channel 1, 8-bit resolution (0-255)
+  ledcAttachPin(ARD_D3, 1);                    // attach Arduino pin 3 equivalent to channel 1
 #else
 #error "This chip is not supported!"
 #endif
-
-  pinMode(ARD_D3, OUTPUT); // CHECK: Don't know whether its necessary
 }
 
 inline void setPWM2(uint8_t s)
@@ -169,7 +167,7 @@ inline void setPWM2(uint8_t s)
   // on arduino mega, pin 11 is now PB5 (OC1A) // Misleading comment
   OCR3C = s;
 #elif defined(ESP32)
-  ledcWrite(1, s);           // channel 1, ARD_D3
+  ledcWrite(1, s);                             // channel 1, ARD_D3
 #else
 #error "This chip is not supported!"
 #endif
@@ -193,14 +191,13 @@ inline void initPWM3(uint8_t freq)
   // TCCR4B = 1 | _BV(WGM12);
   OCR4A = 0;
 #elif defined(ESP32)
-  ledcSetup(2, freq, 8);     // Setting up channel 2, 8-bit resolution (0-255)
-  ledcAttachPin(ARD_D6, 2);  // attach Arduino pin 6 equivalent to channel 2
+  int intFreq = static_cast<int>(freq) * 1000; // for converting uint8_t to int
+  ledcSetup(2, intFreq, 8);                    // Setting up channel 2, 8-bit resolution (0-255)
+  ledcAttachPin(ARD_D6, 2);                    // attach Arduino pin 6 equivalent to channel 2
 
 #else
 #error "This chip is not supported!"
 #endif
-
-  pinMode(ARD_D6, OUTPUT); // CHECK: Don't know whether its necessary
 }
 
 inline void setPWM3(uint8_t s)
@@ -216,7 +213,7 @@ inline void setPWM3(uint8_t s)
   // on arduino mega, pin 6 is now PH3 (OC4A)
   OCR4A = s;
 #elif defined(ESP32)
-  ledcWrite(2, s);           // channel 2, ARD_D6
+  ledcWrite(2, s);                             // channel 2, ARD_D6
 #else
 #error "This chip is not supported!"
 #endif
@@ -240,14 +237,13 @@ inline void initPWM4(uint8_t freq)
   // TCCR4B = 1 | _BV(WGM12);
   OCR3A = 0;
 #elif defined(ESP32)
-  ledcSetup(3, freq, 8);     // Setting up channel 3, 8-bit resolution (0-255)
-  ledcAttachPin(ARD_D5, 3);  // attach Arduino pin 5 equivalent to channel 3
+  int intFreq = static_cast<int>(freq) * 1000; // for converting uint8_t to int
+  ledcSetup(3, intFreq, 8);                    // Setting up channel 3, 8-bit resolution (0-255)
+  ledcAttachPin(ARD_D5, 3);                    // attach Arduino pin 5 equivalent to channel 3
 
 #else
 #error "This chip is not supported!"
 #endif
-
-  pinMode(ARD_D5, OUTPUT); // CHECK: Don't know whether its necessary
 }
 
 inline void setPWM4(uint8_t s)
@@ -263,7 +259,7 @@ inline void setPWM4(uint8_t s)
   // on arduino mega, pin 6 is now PH3 (OC4A)
   OCR3A = s;
 #elif defined(ESP32)
-  ledcWrite(3, s);           // channel 3, ARD_D5
+  ledcWrite(3, s);                             // channel 3, ARD_D5
 #else
 #error "This chip is not supported!"
 #endif
