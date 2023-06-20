@@ -1,7 +1,7 @@
 // Adafruit Motor shield library for JRC Board
 
-#ifndef _AFMotor_h_
-#define _AFMotor_h_
+#ifndef _JRC_AFMotor_h_
+#define _JRC_AFMotor_h_
 
 #include "JRC.h" // JRC Board Pin Mapping
 
